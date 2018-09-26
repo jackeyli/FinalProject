@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+<persistence-unit name="NewPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <non-jta-data-source>java:jboss/sqliteDB</non-jta-data-source>
+        <jta-data-source>java:jboss/sqliteDB</jta-data-source>
+        <class>li.yifei4.datas.entity.Currency</class>
+        <class>li.yifei4.datas.entity.DigitalCurrencyMarket</class>
+        <class>li.yifei4.datas.entity.DigitalCurrencyStock</class>
+        <properties>
+            <property name="hibernate.query.substitutions" value="true 1, false 0" />
+            <property name="hibernate.default_batch_fetch_size" value="16" />
+            <property name="hibernate.max_fetch_depth" value="2" />
+            <property name="hibernate.generate_statistics" value="true" />
+            <property name="hibernate.bytecode.use_reflection_optimizer" value="true" />
+            <property name="hibernate.cache.use_second_level_cache" value="false" />
+            <property name="hibernate.cache.use_query_cache" value="false" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+        </properties>
+    </persistence-unit>
+</persistence>
