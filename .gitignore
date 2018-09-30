@@ -2,6 +2,7 @@ Build/target
 Service/targt
 SqliteDB
 WebApplication/target
+WebApplication/src/main/ngapp/ng-app/node_modules
 .idea
 # Compiled class file
 *.class

@@ -1,12 +1,15 @@
 package li.yifei4.datas.dao;
 
-import li.yifei4.datas.EntityManagerUtils;
 
-import javax.persistence.EntityManager;
+import li.yifei4.util.EntityManagerUtil;
+
+import java.util.Arrays;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class MyCriteriaBuilder<T>{
     private CriteriaBuilder cb;
@@ -22,7 +25,7 @@ public class MyCriteriaBuilder<T>{
     public Order asc(Expression exp) {
         return cb.asc(exp);
     }
-    public Predicate and(Predicate ... preds) {
+     public Predicate and(Predicate ... preds) {
         return cb.and(preds);
     }
     public Predicate predicate(String methodName, Object param){
@@ -35,20 +38,36 @@ public class MyCriteriaBuilder<T>{
             throw re;
         }
     }
-    public Predicate predicate(String methodName,Object param1,Object param2){
-        try {
-            Method method = cb.getClass().getDeclaredMethod(methodName, param1.getClass(), param2.getClass());
-            return (Predicate) method.invoke(cb, param1, param2);
-        }catch(Exception e) {
-            RuntimeException re = new RuntimeException();
-            re.setStackTrace(e.getStackTrace());
-            throw re;
+    private boolean isExecutingMethod(Method m ,String methodName,int parameterCount,Class<?> ... paramClasses) {
+        boolean isValid = Objects.equals(m.getName(),methodName) &&
+                m.getParameterCount() == parameterCount;
+        if(!isValid)
+            return false;
+        List<Class<?>> params = Arrays.asList(m.getParameterTypes());
+        List<Class<?>> inputParam = Arrays.asList(paramClasses);
+        for(int i = 0; i < inputParam.size(); i ++)
+        {
+            Class<?> mClass = params.get(i);
+            isValid = isValid && mClass.isAssignableFrom(inputParam.get(i));
         }
+        return isValid;
     }
-    public Predicate predicate(String methodName,Object param1,Object param2,Object param3){
+    private Method getExecuteMethod(String methodName,Class<?> ...paramClasses){
+        List<Method> methods = Arrays.asList(cb.getClass().getDeclaredMethods()).stream()
+                .filter(m->isExecutingMethod(m,methodName,paramClasses.length,paramClasses)).collect(Collectors.toList());
+        if(methods.size() == 0)
+            throw new RuntimeException("No Such Method");
+        return methods.get(0);
+    }
+    public Predicate predicate(String methodName,Object ...params){
         try {
-            Method method = cb.getClass().getDeclaredMethod(methodName, param1.getClass(), param2.getClass(), param3.getClass());
-            return (Predicate) method.invoke(cb, param1, param2, param3);
+            Class<?>[] clazzes = new Class<?>[params.length];
+            for(int i = 0; i < params.length; i ++)
+            {
+                clazzes[i] = params[i].getClass();
+            }
+            Method method = getExecuteMethod(methodName,clazzes);
+            return (Predicate) method.invoke(cb,params);
         }catch(Exception e) {
             RuntimeException re = new RuntimeException();
             re.setStackTrace(e.getStackTrace());
@@ -68,6 +87,6 @@ public class MyCriteriaBuilder<T>{
         return query.where(p);
     }
     public TypedQuery<T> createExecutiveQuery(){
-        return EntityManagerUtils.getEntityManager().createQuery(query);
+        return EntityManagerUtil.getEntityManager().createQuery(query);
     }
 }

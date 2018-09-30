@@ -10,10 +10,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 @Transactional
 @Service("currencyStockService")
 public class DefaultCurrencyStockServiceImpl implements CurrencyService{
@@ -32,7 +34,7 @@ public class DefaultCurrencyStockServiceImpl implements CurrencyService{
     public List<DigitalMarketCurrency> getCurrencyMarkets(String marketPlc) {
         DigitalMarket market = digitalMarketDao.find(marketPlc);
         List<DigitalMarketCurrencyExchangeInfo> infos = market.getExchangeInfos();
-        List<DigitalMarketCurrency> result = new ArrayList<DigitalMarketCurrency>()
+        List<DigitalMarketCurrency> result = new ArrayList<DigitalMarketCurrency>();
         for(DigitalMarketCurrencyExchangeInfo info : infos) {
             result.add(digitalMarketCurrencyDao.getCurrencyMarkets(info.getRealCurrency(),info.getName(),marketPlc));
         }

@@ -38,12 +38,24 @@
     </dependencies>
 
     <build>
-        <finalName>Build</finalName>
+        <finalName>FinalProject</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>
                     <artifactId>maven-ear-plugin</artifactId>
                     <version>2.9</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.wildfly.plugins</groupId>
+                    <artifactId>wildfly-maven-plugin</artifactId>
+                    <version>1.0.2.Final</version>
+                    <configuration>
+                        <hostname>localhost</hostname>
+                        <port>8880</port>
+                        <username>li.yifei4</username>
+                        <password>Password.1</password>
+                        <filename>FinalProject.ear</filename>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
