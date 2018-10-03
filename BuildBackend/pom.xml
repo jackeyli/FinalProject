@@ -9,10 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>WebApplication</artifactId>
-    <packaging>war</packaging>
-
-    <name>WebApplication Maven Webapp</name>
+    <artifactId>BuildBackend</artifactId>
+    <packaging>ear</packaging>
+    <name>BuildBackend</name>
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
@@ -24,42 +23,38 @@
 
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.11</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>Service</artifactId>
             <version>${project.version}</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>Backend</artifactId>
+            <version>${project.version}</version>
+            <type>war</type>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>WebApplication</finalName>
+        <finalName>Backend</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-                <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.0.2</version>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>2.9</version>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.7.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>2.20.1</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>3.2.0</version>
+                    <groupId>org.wildfly.plugins</groupId>
+                    <artifactId>wildfly-maven-plugin</artifactId>
+                    <version>1.0.2.Final</version>
+                    <configuration>
+                        <hostname>localhost</hostname>
+                        <port>8880</port>
+                        <username>li.yifei4</username>
+                        <password>Password.1</password>
+                        <filename>Backend.ear</filename>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
