@@ -33,18 +33,13 @@ public class DefaultCurrencyStockServiceImpl implements CurrencyService{
     }
     public List<DigitalMarketCurrency> getCurrencyMarkets(String marketPlc) {
         DigitalMarket market = digitalMarketDao.find(marketPlc);
-        List<DigitalMarketCurrencyExchangeInfo> infos = market.getExchangeInfos();
-        List<DigitalMarketCurrency> result = new ArrayList<DigitalMarketCurrency>();
-        for(DigitalMarketCurrencyExchangeInfo info : infos) {
-            result.add(digitalMarketCurrencyDao.getCurrencyMarkets(info.getRealCurrency(),info.getName(),marketPlc));
-        }
-        return result;
+        return market.getCurrencyMarkets();
     }
     public HashMap<String,List<DigitalMarketCurrency>> getAllCurrencies() {
         List<DigitalMarket> markets = digitalMarketDao.findAll();
         HashMap<String,List<DigitalMarketCurrency>> hshMap = new HashMap<String,List<DigitalMarketCurrency>>();
         for(DigitalMarket market : markets) {
-            hshMap.put(market.getName(),this.getCurrencyMarkets(market.getName()));
+            hshMap.put(market.getName(),market.getCurrencyMarkets());
         }
         return hshMap;
     }
