@@ -1,6 +1,6 @@
 package li.yifei4.services;
 
-import li.yifei4.catcher.extractor.CoinbaseExtractor;
+import li.yifei4.catcher.extractor.JsonExtractor;
 import li.yifei4.datas.dao.DigitalMarketCurrencyDao;
 import li.yifei4.datas.dao.DigitalMarketDao;
 import li.yifei4.datas.entity.DigitalMarket;
@@ -23,12 +23,13 @@ public class DefaultCurrencyStockServiceImpl implements CurrencyService{
     private DigitalMarketCurrencyDao digitalMarketCurrencyDao;
     @Resource(name="digitalMarketDao")
     private DigitalMarketDao digitalMarketDao;
-    public void storeCurrencyMarket(String tradePlc) {
-        // Factory;
-        CoinbaseExtractor cE = new CoinbaseExtractor();
-        List<DigitalMarketCurrency> markets = cE.getCurrencyMarket();
-        for(DigitalMarketCurrency market : markets) {
-            digitalMarketCurrencyDao.persist(market);
+    public void storeCurrencyMarket(List<String> tradePlces) {
+        for(String str : tradePlces){
+            JsonExtractor extractor = JsonExtractor.create(str);
+            List<DigitalMarketCurrency> markets = extractor.getCurrencyMarket();
+            for(DigitalMarketCurrency market : markets) {
+                digitalMarketCurrencyDao.persist(market);
+            }
         }
     }
     public List<DigitalMarketCurrency> getCurrencyMarkets(String marketPlc) {

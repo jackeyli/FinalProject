@@ -5,8 +5,8 @@
              version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 <persistence-unit name="NewPersistenceUnit" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-       <jta-data-source>java:jboss/sqliteDB</jta-data-source>
-        <non-jta-data-source>java:jboss/sqliteDB</non-jta-data-source>
+        <jta-data-source>java:jboss/mySqlDS</jta-data-source>
+        <non-jta-data-source>java:jboss/mySqlDS</non-jta-data-source>
 
         <class>li.yifei4.datas.entity.Currency</class>
         <class>li.yifei4.datas.entity.DigitalMarketCurrency</class>
@@ -22,7 +22,7 @@
             <property name="hibernate.bytecode.use_reflection_optimizer" value="true" />
             <property name="hibernate.cache.use_second_level_cache" value="false" />
             <property name="hibernate.cache.use_query_cache" value="false" />
-            <property name="hibernate.dialect" value="li.yifei4.datas.dialect.SQLiteDialect" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect" />
             <property name="hibernate.hbm2ddl.auto" value="none"/>
         </properties>
     </persistence-unit>

@@ -16,7 +16,6 @@ public class JsonCatcher {
         HttpUriRequest request = new HttpGet(url);
         DataInputStream dis = null;
         try {
-
             dis = new DataInputStream(client.execute(request).getEntity().getContent());
             byte[] buffer = new byte[4000];
             byte[] result = new byte[0];

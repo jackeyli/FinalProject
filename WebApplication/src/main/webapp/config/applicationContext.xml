@@ -21,7 +21,6 @@
     <context:annotation-config />
     <context:component-scan base-package="li.yifei4"></context:component-scan>
     <aop:aspectj-autoproxy proxy-target-class="true"/>
-    <jee:jndi-lookup jndi-name="java:jboss/sqliteDB" id="dataSource"/>
     <mvc:annotation-driven/>
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
         <property name="messageConverters">

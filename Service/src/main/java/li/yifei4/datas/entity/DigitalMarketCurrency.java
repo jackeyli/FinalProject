@@ -3,7 +3,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name="FINAL_PROJ_DIGIT_CURRENCY_MARKET")
+@Table(name="FINAL_PROJ_DIGIT_CURRENCY_MARKETS")
 public class DigitalMarketCurrency {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

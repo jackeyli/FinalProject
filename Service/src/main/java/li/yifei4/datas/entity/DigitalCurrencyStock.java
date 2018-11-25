@@ -1,7 +1,7 @@
 package li.yifei4.datas.entity;
 import javax.persistence.*;
 @Entity
-@Table(name="FINAL_PROJ_DIGIT_CURRENCY")
+@Table(name="FINAL_PROJ_DIGIT_CURRENCIES")
 public class DigitalCurrencyStock {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
