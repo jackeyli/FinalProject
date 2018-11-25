@@ -1,6 +1,11 @@
 package li.yifei4.datas.entity;
 
+import li.yifei4.datas.dao.DigitalMarketCurrencyDao;
+import li.yifei4.datas.dao.DigitalMarketDao;
+import li.yifei4.util.ApplicationContextHolder;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -27,6 +32,16 @@ public class DigitalMarket {
         this.name = name;
     }
 
+    public void public List<DigitalMarketCurrency> getCurrencyMarkets() {
+        DigitalMarketCurrencyDao digitalMarketCurrencyDao = (DigitalMarketCurrencyDao) ApplicationContextHolder.
+                getApplicationContext().getBean("digitalMarketCurrencyDao");
+        List<DigitalMarketCurrencyExchangeInfo> infos = this.getExchangeInfos();
+        List<DigitalMarketCurrency> result = new ArrayList<DigitalMarketCurrency>();
+        for(DigitalMarketCurrencyExchangeInfo info : infos) {
+            result.add(digitalMarketCurrencyDao.getCurrencyMarkets(info.getRealCurrency(),info.getName(),this.getName()));
+        }
+        return result;
+    }
     public List<DigitalMarketCurrencyExchangeInfo> getExchangeInfos() {
         return exchangeInfos;
     }
