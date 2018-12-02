@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class COINBASEExtractor implements JsonExtractor {
 
-    public List<AbstractMap.SimpleEntry> getAllCurrLists() {
+    /*public List<AbstractMap.SimpleEntry> getAllCurrLists() {
         List<AbstractMap.SimpleEntry> lst = new ArrayList();
         lst.add(new AbstractMap.SimpleEntry("BTC","USD"));
         lst.add(new AbstractMap.SimpleEntry("ETH","USD"));
@@ -22,7 +22,7 @@ public class COINBASEExtractor implements JsonExtractor {
         lst.add(new AbstractMap.SimpleEntry("LTC","USD"));
         lst.add(new AbstractMap.SimpleEntry("ETC","USD"));
         return lst;
-    }
+    }*/
     private DigitalMarketCurrency getCurrencyMarket(String digCurrency,String currency) throws ParseException {
        JsonCatcher catcher = new JsonCatcher();
         JsonArray jArr = catcher

@@ -4,6 +4,8 @@ import li.yifei4.datas.entity.DigitalMarket;
 import org.springframework.stereotype.Repository;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+
 @Repository("digitalMarketDao")
 public class DigitalMarketDao extends EntityDao<DigitalMarket>{
     public DigitalMarket find(String marketPlc) {
@@ -16,5 +18,9 @@ public class DigitalMarketDao extends EntityDao<DigitalMarket>{
             re.setStackTrace(e.getStackTrace());
             throw re;
         }
+    }
+    public List<DigitalMarket> getAllSupportedMarket(){
+        MyCriteriaBuilder<DigitalMarket> builder = this.getCriteriaBuilder();
+        return builder.createExecutiveQuery().getResultList();
     }
 }

@@ -22,7 +22,7 @@ public class MyController {
     @RequestMapping("/myProcess")
     @ResponseBody
     public String myProcess() throws IOException, ClientProtocolException {
-        myService.storeCurrencyMarket(Arrays.asList(new String[]{"COINBASE","COINEX","HUOBI","POLONIEX"}));
+        myService.storeCurrencyMarket();
         return "success";
     }
     @RequestMapping("/")

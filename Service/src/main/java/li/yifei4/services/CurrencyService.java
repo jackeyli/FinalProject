@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface CurrencyService   {
-     void storeCurrencyMarket(List<String> tradePlces);
+     void storeCurrencyMarket();
      List<DigitalMarketCurrency> getCurrencyMarkets(String marketPlc);
      HashMap<String,List<DigitalMarketCurrency>> getAllCurrencies();
 }

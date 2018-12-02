@@ -13,6 +13,6 @@ public class ExtractionJob implements Job {
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         Logger.getLogger("actuallyUsingLog").info("Job Executed!");
         ((CurrencyService)ApplicationContextHolder
-                .getApplicationContext().getBean("currencyStockService")).storeCurrencyMarket(Arrays.asList(new String[]{"COINBASE","COINEX","HUOBI","POLONIEX"}));
+                .getApplicationContext().getBean("currencyStockService")).storeCurrencyMarket();
     }
 }

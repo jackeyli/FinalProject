@@ -32,7 +32,7 @@ public class DigitalMarket {
         this.name = name;
     }
 
-    public void public List<DigitalMarketCurrency> getCurrencyMarkets() {
+    public List<DigitalMarketCurrency> getCurrencyMarkets() {
         DigitalMarketCurrencyDao digitalMarketCurrencyDao = (DigitalMarketCurrencyDao) ApplicationContextHolder.
                 getApplicationContext().getBean("digitalMarketCurrencyDao");
         List<DigitalMarketCurrencyExchangeInfo> infos = this.getExchangeInfos();

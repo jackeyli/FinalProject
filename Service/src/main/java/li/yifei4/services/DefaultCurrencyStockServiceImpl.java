@@ -23,12 +23,13 @@ public class DefaultCurrencyStockServiceImpl implements CurrencyService{
     private DigitalMarketCurrencyDao digitalMarketCurrencyDao;
     @Resource(name="digitalMarketDao")
     private DigitalMarketDao digitalMarketDao;
-    public void storeCurrencyMarket(List<String> tradePlces) {
-        for(String str : tradePlces){
-            JsonExtractor extractor = JsonExtractor.create(str);
-            List<DigitalMarketCurrency> markets = extractor.getCurrencyMarket();
-            for(DigitalMarketCurrency market : markets) {
-                digitalMarketCurrencyDao.persist(market);
+    public void storeCurrencyMarket() {
+        List<DigitalMarket> markets = digitalMarketDao.getAllSupportedMarket();
+        for(DigitalMarket mkt : markets){
+            JsonExtractor extractor = JsonExtractor.create(mkt.getName());
+            List<DigitalMarketCurrency> marketCurrencies = extractor.getCurrencyMarket();
+            for(DigitalMarketCurrency currency : marketCurrencies) {
+                digitalMarketCurrencyDao.persist(currency);
             }
         }
     }

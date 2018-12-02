@@ -9,6 +9,9 @@ import org.apache.http.impl.client.HttpClientBuilder;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JsonCatcher {
     public JsonElement catchFromURL(String url){
