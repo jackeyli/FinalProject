@@ -25,9 +25,9 @@ public class MyController {
         myService.storeCurrencyMarket();
         return "success";
     }
-    @RequestMapping("/")
+    @RequestMapping("/getCurrencies")
     @ResponseBody
     public List<DigitalMarketCurrency> getCurrencies() throws IOException, ClientProtocolException {
-        return myService.getCurrencyMarkets("COINBASE");
+        return myService.getCurrencyMarkets();
     }
 }

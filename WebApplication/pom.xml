@@ -44,7 +44,7 @@
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>3.0.0</version>
                 </plugin>
-                <!--<plugin>
+                <plugin>
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>1.6.0</version>
@@ -56,15 +56,11 @@
                                 <goal>exec</goal>
                             </goals>
                             <configuration>
-                                <executable>cmd</executable>
-                                <arguments>
-                                    <argument>/C</argument>
-                                    <argument>build\build.bat</argument>
-                                </arguments>
+                                <executable>./build/build.sh</executable>
                             </configuration>
                         </execution>
                     </executions>
-                </plugin>-->
+                </plugin>
                 <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
                 <plugin>
                     <artifactId>maven-resources-plugin</artifactId>

@@ -42,20 +42,25 @@
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
                 <plugin>
-                    <artifactId>maven-ear-plugin</artifactId>
-                    <version>2.9</version>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.6.0</version>
+                    <executions>
+                        <execution>
+                            <id>postInstall</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>exec</goal>
+                            </goals>
+                            <configuration>
+                                <executable>./post-install.sh</executable>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
-                    <groupId>org.wildfly.plugins</groupId>
-                    <artifactId>wildfly-maven-plugin</artifactId>
-                    <version>1.0.2.Final</version>
-                    <configuration>
-                        <hostname>localhost</hostname>
-                        <port>8880</port>
-                        <username>li.yifei4</username>
-                        <password>Lyf122506341</password>
-                        <filename>FinalProject.ear</filename>
-                    </configuration>
+                    <artifactId>maven-ear-plugin</artifactId>
+                    <version>2.9</version>
                 </plugin>
             </plugins>
         </pluginManagement>

@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface CurrencyService   {
      void storeCurrencyMarket();
-     List<DigitalMarketCurrency> getCurrencyMarkets(String marketPlc);
+     List<DigitalMarketCurrency> getCurrencyMarkets();
      HashMap<String,List<DigitalMarketCurrency>> getAllCurrencies();
 }
