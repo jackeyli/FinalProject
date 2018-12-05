@@ -1,4 +1,5 @@
 package li.yifei4.controllers;
+import li.yifei4.beans.CurrencyPriceQueryBean;
 import li.yifei4.datas.entity.DigitalMarketCurrency;
 import li.yifei4.services.CurrencyService;
 import org.apache.http.client.ClientProtocolException;
@@ -29,5 +30,10 @@ public class MyController {
     @ResponseBody
     public List<DigitalMarketCurrency> getCurrencies() throws IOException, ClientProtocolException {
         return myService.getCurrencyMarkets();
+    }
+    @RequestMapping("/currencyPriceHistory")
+    @ResponseBody
+    public List getCurrencyPriceHistory(@RequestBody CurrencyPriceQueryBean bean) throws IOException, ClientProtocolException {
+        return myService.currencyPriceHistory(bean);
     }
 }

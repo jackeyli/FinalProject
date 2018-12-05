@@ -23,7 +23,7 @@ public class HUOBIExtractor implements JsonExtractor{
                         dCurrencyM.setName(entry.getKey().toString());
                         dCurrencyM.setCurrency(entry.getValue().toString());
                         dCurrencyM.setMarketPlcName("HUOBI");
-                        dCurrencyM.setTimeStamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+                        dCurrencyM.setTimeStamp(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                         dCurrencyM.setPrice(ele.getAsJsonObject().get("close").getAsDouble());
                         digitalCurrLst.add(dCurrencyM);
                         break;

@@ -59,25 +59,30 @@ class OverviewContainer extends Component {
     }
     render(){
         return (
-                <Container>
-                    <div>
-                    {this.state.markets.map((mkt)=>{
+                <div class="panel panel-default" style={{margin:"10px 10px 10px 10px"}}>
+                    <div class="panel-heading">Current Market Prices</div>
+                    <div class="panel-body">
+                        <Container>
+                            <div>
+                                {this.state.markets.map((mkt)=>{
 
-                        return this.state.activeMarkets.indexOf(mkt) >= 0 ?
-                            (
-                            <Button icon labelPosition="left" onClick={()=>this.onMarketClick(mkt)}>
-                                <Icon name='check' />
-                                {mkt}
-                            </Button>
-                            ) : (
-                            <Button icon labelPosition="left" onClick={()=>this.onMarketClick(mkt)}>
-                               {mkt}
-                               </Button>
-                            )
-                    })}
+                                    return this.state.activeMarkets.indexOf(mkt) >= 0 ?
+                                (
+                                    <Button icon labelPosition="left" onClick={()=>this.onMarketClick(mkt)}>
+                                        <Icon name='check' />
+                                        {mkt}
+                                    </Button>
+                                ) : (
+                                    <Button icon labelPosition="left" onClick={()=>this.onMarketClick(mkt)}>
+                                        {mkt}
+                                    </Button>
+                                )
+                                })}
+                            </div>
+                            <MarketGrid data={this.state.marketDatas}></MarketGrid>
+                        </Container>
                     </div>
-                    <MarketGrid data={this.state.marketDatas}></MarketGrid>
-                </Container>
+                </div>
             )
     }
 

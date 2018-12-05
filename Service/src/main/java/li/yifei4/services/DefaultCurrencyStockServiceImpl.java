@@ -1,6 +1,8 @@
 package li.yifei4.services;
 
+import li.yifei4.beans.CurrencyPriceQueryBean;
 import li.yifei4.catcher.extractor.JsonExtractor;
+import li.yifei4.datas.dao.CurrencyQuery;
 import li.yifei4.datas.dao.DigitalMarketCurrencyDao;
 import li.yifei4.datas.dao.DigitalMarketDao;
 import li.yifei4.datas.entity.DigitalMarket;
@@ -48,5 +50,8 @@ public class DefaultCurrencyStockServiceImpl implements CurrencyService{
             hshMap.put(market.getName(),market.getCurrencyMarkets());
         }
         return hshMap;
+    }
+    public List currencyPriceHistory(CurrencyPriceQueryBean bean){
+        return digitalMarketCurrencyDao.queryForPrices(bean.getMarket(),bean.getName(),bean.getInterval());
     }
 }

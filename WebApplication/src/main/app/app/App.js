@@ -1,9 +1,20 @@
 import React,{Component} from 'react';
-import OverviewContainer from './Components/OverviewContainer';
+import {Router,Route,IndexRoute,browserHistory} from "react-router";
+import OverviewPage from './pages/OverviewPage';
+import PriceDiffPage from './pages/PriceDiffPage';
+import {Home} from './Home';
 class App extends Component{
     render(){
         return (
-            <OverviewContainer/>
+            <div>
+                <Router history={browserHistory}>
+                    <Route path={"/"} component={Home}>
+                        <IndexRoute component={OverviewPage}/>
+                        <Route path={"overview"} component={OverviewPage} />
+                        <Route path={"pricediff"} component={PriceDiffPage} />
+                    </Route>
+                </Router>
+            </div>
         );
     }
 }

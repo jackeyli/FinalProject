@@ -6,10 +6,7 @@ import li.yifei4.datas.entity.DigitalMarketCurrency;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class POLONIEXExtractor implements JsonExtractor {
     @Override
@@ -23,9 +20,13 @@ public class POLONIEXExtractor implements JsonExtractor {
                 dCurrencyM.setName(entry.getKey().toString());
                 dCurrencyM.setCurrency(entry.getValue().toString());
                 dCurrencyM.setMarketPlcName("POLONIEX");
-                dCurrencyM.setTimeStamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+                dCurrencyM.setTimeStamp(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
+                String key = Objects.equals(entry.getKey().toString(),"BCH") ? "BCHABC": entry.getKey().toString();
+                String value_1 = "USDT";
                 dCurrencyM.setPrice(
-                        new BigDecimal(jsonData.getAsJsonObject(entry.getValue().toString() + "_" + entry.getKey().toString())
+                        new BigDecimal(Optional
+                                .ofNullable(jsonData.getAsJsonObject(entry.getValue().toString() + "_" + key))
+                                .orElse(jsonData.getAsJsonObject("USDC_" + key))
                                 .get("last").getAsString())
                                 .doubleValue());
                 digitalCurrLst.add(dCurrencyM);

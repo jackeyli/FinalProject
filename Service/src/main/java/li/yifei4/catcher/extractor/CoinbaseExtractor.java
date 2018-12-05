@@ -32,7 +32,7 @@ public class COINBASEExtractor implements JsonExtractor {
        DigitalMarketCurrency dCurrencyM = new DigitalMarketCurrency();
        dCurrencyM.setName(digCurrency);
        dCurrencyM.setCurrency(currency);
-       dCurrencyM.setTimeStamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+       dCurrencyM.setTimeStamp(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
        dCurrencyM.setPrice(jObj.get("price").getAsDouble());
        dCurrencyM.setMarketPlcName("COINBASE");
        return dCurrencyM;

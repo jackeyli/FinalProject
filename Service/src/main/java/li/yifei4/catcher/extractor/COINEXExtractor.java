@@ -23,7 +23,7 @@ public class COINEXExtractor implements JsonExtractor {
                 dCurrencyM.setName(entry.getKey().toString());
                 dCurrencyM.setCurrency(entry.getValue().toString());
                 dCurrencyM.setMarketPlcName("COINEX");
-                dCurrencyM.setTimeStamp(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+                dCurrencyM.setTimeStamp(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
                 dCurrencyM.setPrice(
                         new BigDecimal(jsonData.getAsJsonObject(dCurrencyM.getName()).get(entry.getValue().toString()).getAsString())
                                 .doubleValue());
