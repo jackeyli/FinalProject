@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Icon, Table,Container,Button } from 'semantic-ui-react'
+import { Icon, Table,Container,Button,Grid} from 'semantic-ui-react'
 import MarketGrid from './Table/MarketGrid';
 import axios from 'axios';
 
@@ -18,7 +18,7 @@ class OverviewContainer extends Component {
     }
     componentDidMount(){
         axios.get('request/test/getCurrencies').then((result)=>{
-            const res = result.data,
+            const res = result.data.content,
             markets = res.reduce((pre,cur)=>{
                 if(pre.indexOf(cur['marketPlcName']) < 0)
                     pre.push(cur['marketPlcName']);
@@ -59,9 +59,14 @@ class OverviewContainer extends Component {
     }
     render(){
         return (
-                <div class="panel panel-default" style={{margin:"10px 10px 10px 10px"}}>
-                    <div class="panel-heading">Current Market Prices</div>
-                    <div class="panel-body">
+                <Grid padded>
+                    <Grid.Row color="grey">
+                        <Grid.Column>
+                            Current Market Prices
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Grid.Column>
                         <Container>
                             <div>
                                 {this.state.markets.map((mkt)=>{
@@ -81,8 +86,9 @@ class OverviewContainer extends Component {
                             </div>
                             <MarketGrid data={this.state.marketDatas}></MarketGrid>
                         </Container>
-                    </div>
-                </div>
+                    </Grid.Column>
+                </Grid.Row>
+                </Grid>
             )
     }
 

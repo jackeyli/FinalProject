@@ -13,6 +13,10 @@
         <class>li.yifei4.datas.entity.DigitalCurrencyStock</class>
         <class>li.yifei4.datas.entity.DigitalMarket</class>
         <class>li.yifei4.datas.entity.DigitalMarketCurrencyExchangeInfo</class>
+        <class>li.yifei4.datas.entity.DiffThresHoldCondition</class>
+        <class>li.yifei4.datas.entity.MANotificationCondition</class>
+        <class>li.yifei4.datas.entity.NotificationCondition</class>
+        <class>li.yifei4.datas.entity.User</class>
         <properties>
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.query.substitutions" value="true 1, false 0" />

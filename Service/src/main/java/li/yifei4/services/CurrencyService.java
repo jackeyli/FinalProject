@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public interface CurrencyService   {
-     void storeCurrencyMarket();
+     boolean storeCurrencyMarket();
      List<DigitalMarketCurrency> getCurrencyMarkets();
      HashMap<String,List<DigitalMarketCurrency>> getAllCurrencies();
      List currencyPriceHistory(CurrencyPriceQueryBean bean);

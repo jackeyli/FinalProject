@@ -53,6 +53,7 @@
             <tx:method name="save*"  read-only="false" propagation="REQUIRED"/>
             <tx:method name="update*"  read-only="false" propagation="REQUIRED"/>
             <tx:method name="insert*"  read-only="false" propagation="REQUIRED" />
+            <tx:method name="remove*"  read-only="false" propagation="REQUIRED" />
             <tx:method name="store*"  read-only="false" propagation="REQUIRED" />
             <tx:method name="search*"  propagation="NOT_SUPPORTED" read-only="true"/>
             <tx:method name="find*"  propagation="NOT_SUPPORTED" read-only="true"/>

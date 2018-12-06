@@ -10,19 +10,20 @@ class PriceDiffPage extends Component{
     }
     componentDidMount(){
         axios.get('request/test/getCurrencies').then((result)=>{
-            const res = result.data;
+            const res = result.data.content;
             const currencies = res
                 .reduce((pre,cur)=>{
                 if(!pre[cur['name']])
                     pre[cur['name']] = {};
                 return pre;
             },{});
+
             this.setState({data:res,currencies:_.keys(currencies)});
         });
     }
     render(){
         return (
-            <Container>
+            <div>
               <PriceDiffTable data={this.state.data
                     .reduce((pre,cur)=>{
                         if(!pre[cur['name']])
@@ -65,7 +66,7 @@ class PriceDiffPage extends Component{
                   curMarket="POLONIEX"
                   markets={["COINBASE","COINEX","HUOBI","POLONIEX"]}
                   currencies={this.state.currencies}/>
-            </Container>
+            </div>
         );
     }
 }

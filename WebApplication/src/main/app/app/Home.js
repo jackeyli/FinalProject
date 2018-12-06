@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import {Container} from 'semantic-ui-react';
+import SignInModal from './Components/Login/SignInModal';
+import SignUpModal from './Components/Login/SignUpModal';
 import {Header} from './Header';
 export class Home extends Component {
     render(){
@@ -10,6 +11,8 @@ export class Home extends Component {
              <div className="row">
                 {this.props.children}
              </div>
+             <SignInModal/>
+             <SignUpModal/>
         </div>)
     }
 }

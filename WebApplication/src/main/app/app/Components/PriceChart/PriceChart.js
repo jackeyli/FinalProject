@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import { Container,Button,Select} from 'semantic-ui-react'
+import { Container,Button,Select,Grid} from 'semantic-ui-react'
 import axios from 'axios';
 
 class PriceChart extends Component{
@@ -9,7 +9,7 @@ class PriceChart extends Component{
     }
     componentDidMount(){
         axios.get('request/test/getCurrencies').then((res)=>{
-            const currencies = res.data.reduce((pre,cur)=>{
+            const currencies = res.data.content.reduce((pre,cur)=>{
                 if(pre.filter((t)=>t['Currency Name'] == cur['name']).length == 0)
                     pre.push({'Currency Name':cur['name'],key:cur['name']});
                 return pre;
@@ -19,7 +19,7 @@ class PriceChart extends Component{
                 name:this.state.currency,
                 interval:'30MIN'
             }).then((res)=>{
-                this.setState({currencies:currencies.map((t)=>t['key']),data:res.data,activeInterval:'30MIN'});
+                this.setState({currencies:currencies.map((t)=>t['key']),data:res.data.content,activeInterval:'30MIN'});
             });
         })
     }
@@ -170,7 +170,7 @@ class PriceChart extends Component{
             name:arg2.value,
             interval:state.interval
         }).then((res)=>{
-            this.setState({data:res.data,currency:arg2.value});
+            this.setState({data:res.data.content,currency:arg2.value});
         });
     }
     onChangePeriod(period){
@@ -180,14 +180,19 @@ class PriceChart extends Component{
             name:state.currency,
             interval:period
         }).then((res)=>{
-            this.setState({data:res.data,activeInterval:period});
+            this.setState({data:res.data.content,activeInterval:period});
         });
     }
     render(){
         return (
-            <div class="panel panel-default" style={{margin:"10px 10px 10px 10px"}}>
-                <div class="panel-heading">{"Price History Of " + this.props.market}</div>
-                <div class="panel-body">
+            <Grid padded>
+            <Grid.Row color="grey">
+                <Grid.Column >
+                    {"Price History Of " + this.props.market}
+                </Grid.Column>
+            </Grid.Row>
+            <Grid.Row>
+                <Grid.Column>
             <Container>
                 <p>
                 <Select placeholder="Select a currency" value={this.state.currency}
@@ -209,9 +214,10 @@ class PriceChart extends Component{
                 </p>
                 <div style={{width:'100%',height:'300px'}} ref={ (chart) => this.chart = chart }></div>
                 </Container>
-                </div>
-            </div>
-)
+                </Grid.Column>
+            </Grid.Row>
+            </Grid>
+    )
     }
 }
 PriceChart.defaultProps = {

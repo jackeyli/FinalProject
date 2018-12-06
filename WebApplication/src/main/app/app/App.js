@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {Router,Route,IndexRoute,browserHistory} from "react-router";
 import OverviewPage from './pages/OverviewPage';
 import PriceDiffPage from './pages/PriceDiffPage';
+import SubscriptionPage from './pages/SubscriptionPage';
 import {Home} from './Home';
 class App extends Component{
     render(){
@@ -12,6 +13,7 @@ class App extends Component{
                         <IndexRoute component={OverviewPage}/>
                         <Route path={"overview"} component={OverviewPage} />
                         <Route path={"pricediff"} component={PriceDiffPage} />
+                        <Route path={"subscription"} component={SubscriptionPage} />
                     </Route>
                 </Router>
             </div>

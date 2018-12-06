@@ -1,15 +1,19 @@
 import React,{Component} from 'react';
-import {Table} from 'semantic-ui-react';
+import {Table,Grid} from 'semantic-ui-react';
 class PriceDiffTable extends Component{
     constructor(props){
         super(props);
-        debugger;
     }
     render(){
         return (
-            <div class="panel panel-default" style={{margin:"10px 10px 10px 10px"}}>
-                <div class="panel-heading">{"Price Compare Of " + this.props.curMarket}</div>
-            <div class="panel-body">
+            <Grid padded>
+                <Grid.Row color="grey">
+                    <Grid.Column>
+                        {"Price Compare Of " + this.props.curMarket}
+                    </Grid.Column>
+                </Grid.Row>
+                <Grid.Row>
+                    <Grid.Column>
                 <Table cell padded>
                     <Table.Header>
                     <Table.Row>
@@ -53,8 +57,9 @@ class PriceDiffTable extends Component{
                         })}
                     </Table.Body>
                 </Table>
-            </div>
-        </div>
+            </Grid.Column>
+        </Grid.Row>
+        </Grid>
         );
     }
 }
