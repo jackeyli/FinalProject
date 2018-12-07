@@ -10,10 +10,15 @@ public class NotificationHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="OID")
     private int oid;
+
+
     @Column(name="TRIGGERTIME")
     private Date triggerTime;
-    @Column(name="NTOID")
-    private int ntOid;
+
+    @ManyToOne
+    @JoinColumn(name = "NTOID", referencedColumnName = "OID")
+    private NotificationCondition condition;
+
     public int getOid() {
         return oid;
     }
@@ -29,11 +34,11 @@ public class NotificationHistory {
         this.triggerTime = triggerTime;
     }
 
-    public int getNtOid() {
-        return ntOid;
+    public NotificationCondition getCondition() {
+        return condition;
     }
 
-    public void setNtOid(int ntOid) {
-        this.ntOid = ntOid;
+    public void setCondition(NotificationCondition condition) {
+        this.condition = condition;
     }
 }

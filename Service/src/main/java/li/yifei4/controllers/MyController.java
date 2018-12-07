@@ -1,21 +1,21 @@
 package li.yifei4.controllers;
-import li.yifei4.beans.CurrencyPriceQueryBean;
-import li.yifei4.beans.NotificationBean;
-import li.yifei4.beans.ResponseDTO;
+import li.yifei4.beans.*;
 import li.yifei4.datas.entity.DigitalMarketCurrency;
 import li.yifei4.datas.entity.NotificationCondition;
 import li.yifei4.services.ConditionService;
 import li.yifei4.services.CurrencyService;
+import li.yifei4.services.NotificationService;
 import li.yifei4.util.UserAgent;
 import org.apache.http.client.ClientProtocolException;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Hello world!
@@ -28,6 +28,9 @@ public class MyController {
 
     @Resource(name="conditionService")
     private ConditionService conditionService;
+
+    @Resource(name="notificationService")
+    private NotificationService notificationService;
 
     @RequestMapping("/myProcess")
     @ResponseBody
@@ -87,7 +90,14 @@ public class MyController {
         ResponseDTO resp = new ResponseDTO();
         int userId = UserAgent.INSTANCE.getInstance().getUserID();
         try{
-            resp.setContent(conditionService.getNotificationCondition(userId));
+            resp.setContent(conditionService.getNotificationCondition(userId).stream()
+            .map((t)->{
+                NotificationConditionBean bean = new NotificationConditionBean();
+                bean.setName(t.getName());
+                bean.setNotifyType(t.getNotifyType());
+                bean.setType(t.getType());
+                return bean;
+            }).collect(Collectors.toList()));
         }catch(Throwable t){
             resp.setErrorMessage(t.getMessage());
         }finally {
@@ -102,6 +112,33 @@ public class MyController {
         try{
             conditionService.removeNotificationCondition(id);
             resp.setContent("success");
+        }catch(Throwable t){
+            resp.setErrorMessage(t.getMessage());
+        }finally {
+            return resp;
+        }
+    }
+
+    @RequestMapping("/notificationHistory")
+    @ResponseBody
+    public ResponseDTO  notificationHistory(@RequestBody NotificationHistoryQueryBean bean) throws IOException, ClientProtocolException {
+        ResponseDTO resp = new ResponseDTO();
+        try{
+            Date from = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(bean.getDateFrom());
+            Date to = StringUtils.isEmpty(bean.getDateTo()) ?
+                    new Date() : new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(bean.getDateTo());
+            List<NotificationHistoryBean> result =
+                    notificationService.getNotificationHistory(UserAgent.INSTANCE.getInstance().getUserID(),from,to)
+                    .stream().map((t)->{
+                        NotificationHistoryBean newBean = new NotificationHistoryBean();
+                        newBean.setCurrencyName(t.getCondition().getName());
+                        newBean.setNotifyType(t.getCondition().getNotifyType());
+                        newBean.setOid(t.getOid());
+                        newBean.setTriggerTime(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(t.getTriggerTime()));
+                        newBean.setType(t.getCondition().getType());
+                        return newBean;
+                    }).collect(Collectors.toList());
+            resp.setContent(result);
         }catch(Throwable t){
             resp.setErrorMessage(t.getMessage());
         }finally {

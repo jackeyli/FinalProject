@@ -1,5 +1,8 @@
 package li.yifei4.datas.entity;
+import javax.management.Notification;
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name="FINAL_PROJ_USERS")
 public class User {
@@ -19,6 +22,9 @@ public class User {
 
     @Column(name="PASSWORD")
     private String password;
+
+    @OneToMany(mappedBy="user",fetch= FetchType.LAZY)
+    private List<NotificationCondition> conditions;
 
     public int getOid() {
         return oid;
@@ -55,5 +61,13 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<NotificationCondition> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<NotificationCondition> conditions) {
+        this.conditions = conditions;
     }
 }

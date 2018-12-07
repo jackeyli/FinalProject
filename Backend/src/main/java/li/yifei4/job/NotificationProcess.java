@@ -21,7 +21,11 @@ public class NotificationProcess implements Runnable{
                 .getApplicationContext().getBean("notificationService"));
         List<ConditionCheckResult> passedConditions = conditionService.getPassedConditionThisRound();
         for(ConditionCheckResult result : passedConditions){
-            notificationService.storeHistoryAndNotifiyUser(result);
+            try {
+                notificationService.storeHistoryAndNotifiyUser(result);
+            }catch(Throwable t){
+
+            }
         }
 
     }

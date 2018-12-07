@@ -29,12 +29,15 @@ export const Header = (props)=>{
             <Menu.Item name="subscription">
                 <Link to="/subscription">Subscription</Link>
             </Menu.Item>
+            <Menu.Item name="notificationHistory">
+                <Link to="/notificationHistory">Notification History</Link>
+            </Menu.Item>
             <Menu.Menu position='right'>
                 <Menu.Item>
-                    <Button onClick={onOpenSignInModal}>Sign In</Button>
+                    <Button size="small" onClick={onOpenSignInModal}>Sign In</Button>
                 </Menu.Item>
                 <Menu.Item>
-                    <Button onClick={onOpenSignUpModal}>Sign Up</Button>
+                    <Button size="small" onClick={onOpenSignUpModal}>Sign Up</Button>
                 </Menu.Item>
             </Menu.Menu>
         </Menu>

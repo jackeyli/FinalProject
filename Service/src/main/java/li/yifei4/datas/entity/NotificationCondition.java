@@ -1,5 +1,7 @@
 package li.yifei4.datas.entity;
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name="FINAL_PROJ_NOTIFICATION_CONDITION")
 public class NotificationCondition {
@@ -8,8 +10,12 @@ public class NotificationCondition {
     @Column(name="OID")
     private int oid;
 
-    @Column(name="USER_OID")
-    private int userOid;
+    @ManyToOne
+    @JoinColumn(name = "USER_OID", referencedColumnName = "OID")
+    private User user;
+
+    @OneToMany(mappedBy="condition",fetch= FetchType.LAZY)
+    private List<NotificationHistory> history;
 
     @Column(name="TYPE")
     private String type;
@@ -32,14 +38,6 @@ public class NotificationCondition {
 
     public void setOid(int oid) {
         this.oid = oid;
-    }
-
-    public int getUserOid() {
-        return userOid;
-    }
-
-    public void setUserOid(int userOid) {
-        this.userOid = userOid;
     }
 
     public String getType() {
@@ -72,5 +70,21 @@ public class NotificationCondition {
 
     public void setSubCondiOid(int subCondiOid) {
         this.subCondiOid = subCondiOid;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<NotificationHistory> getHistory() {
+        return history;
+    }
+
+    public void setHistory(List<NotificationHistory> history) {
+        this.history = history;
     }
 }

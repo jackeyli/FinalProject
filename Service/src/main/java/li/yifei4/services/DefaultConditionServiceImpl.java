@@ -78,7 +78,7 @@ public class DefaultConditionServiceImpl implements ConditionService{
 
     public boolean storeNotification(NotificationBean bean){
         NotificationCondition condition = new NotificationCondition();
-        condition.setUserOid(bean.getUserOid());
+        condition.setUser(EntityManagerUtil.getEntityManager().find(User.class,bean.getUserOid()));
         condition.setNotifyType(bean.getNotifyType());
         condition.setName(bean.getCurrencyName());
         condition.setType(bean.getType());

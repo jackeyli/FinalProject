@@ -59,7 +59,9 @@ public class MAConditionCheckResult extends ConditionCheckResult{
         this.direction = direction;
     }
 
-    public String getNotificationText(){
-        return "test2";
+    public String getNotificationText() {
+        return "The currency " + this.currencyName + " triggers an alert, the ma_1(" + this.getMa_1() + ") go"
+               + this.getDirection() + " ma_2(" + this.getMa_2() + ") in market place " + this.getMarketPlc()
+                + "with k line interval " + this.getInterval();
     }
 }

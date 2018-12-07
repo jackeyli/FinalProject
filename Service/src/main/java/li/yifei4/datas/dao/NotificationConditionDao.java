@@ -9,7 +9,7 @@ import java.util.List;
 public class NotificationConditionDao extends EntityDao<NotificationCondition> {
     public List<NotificationCondition> getUserNotifications(int userId){
         MyCriteriaBuilder<NotificationCondition> builder = this.getCriteriaBuilder();
-        builder.where(builder.predicate("equal",builder.get("userOid"),userId));
+        builder.where(builder.predicate("equal",builder.get("user").get("oid"),userId));
         return builder.createExecutiveQuery().getResultList();
     }
 }

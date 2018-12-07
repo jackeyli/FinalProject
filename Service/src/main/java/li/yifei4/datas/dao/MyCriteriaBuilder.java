@@ -16,7 +16,7 @@ public class MyCriteriaBuilder<T>{
     private Root<T> root;
     private CriteriaQuery<T> query;
     private Predicate predicate;
-    public Expression get(String name){
+    public Path get(String name){
         return root.get(name);
     }
     public Order desc (Expression exp){
