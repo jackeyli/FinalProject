@@ -59,8 +59,8 @@ public class DefaultNotificationServiceImpl implements NotificationService{
         return historyDao.getNotificationHistory(userId,from,to);
     }
     private boolean sendEmail(String emailAddr,String message){
-        String encodedKey = "QUtJQUlCTkc0NDdDQURJUkQ3Q0E=";
-        String encodedSecretKey = "RFlYVERpSDlFYXRTRkVBbHVyWUdOblBTTjdQLzB0UWxVd2E2NUpjWA==";
+        String encodedKey = "QUtJQUpOVEVUMllDUEIzNUhKU0E=";
+        String encodedSecretKey = "ZnVOU1Q2MlB5VGJNNmE1eW1sayt0Rml6VGhTd1NyS1ArTk9YOTd5UQ==";
         AmazonSimpleEmailService client = AmazonSimpleEmailServiceClientBuilder.standard()
                 .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(
                         new String(Base64.getDecoder().decode(encodedKey)),
@@ -80,8 +80,8 @@ public class DefaultNotificationServiceImpl implements NotificationService{
         return true;
     }
     private boolean sendMessage(String phoneNumber,String message) {
-        String encodedKey = "QUtJQUlCTkc0NDdDQURJUkQ3Q0E=";
-        String encodedSecretKey = "RFlYVERpSDlFYXRTRkVBbHVyWUdOblBTTjdQLzB0UWxVd2E2NUpjWA==";
+        String encodedKey = "QUtJQUpOVEVUMllDUEIzNUhKU0E=";
+        String encodedSecretKey = "ZnVOU1Q2MlB5VGJNNmE1eW1sayt0Rml6VGhTd1NyS1ArTk9YOTd5UQ==";
         AmazonSNSClient snsClient = (AmazonSNSClient) AmazonSNSClientBuilder.standard().withCredentials(
                 new AWSStaticCredentialsProvider(new BasicAWSCredentials(new String(Base64.getDecoder().decode(encodedKey)),
                         new String(Base64.getDecoder().decode(encodedSecretKey)))))
