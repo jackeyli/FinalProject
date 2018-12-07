@@ -58,4 +58,8 @@ public class MAConditionCheckResult extends ConditionCheckResult{
     public void setDirection(String direction) {
         this.direction = direction;
     }
+
+    public String getNotificationText(){
+        return "test2";
+    }
 }

@@ -2,7 +2,7 @@ package li.yifei4.beans;
 
 import li.yifei4.datas.entity.NotificationCondition;
 
-public class ConditionCheckResult {
+public abstract class ConditionCheckResult {
     private boolean pass;
 
     private NotificationCondition condition;
@@ -20,5 +20,8 @@ public class ConditionCheckResult {
 
     public void setCondition(NotificationCondition condition) {
         this.condition = condition;
+    }
+    public String getNotificationText(){
+        return null;
     }
 }

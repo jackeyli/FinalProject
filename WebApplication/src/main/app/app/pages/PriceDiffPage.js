@@ -8,6 +8,15 @@ class PriceDiffPage extends Component{
         super(props);
         this.state = {data:[]};
     }
+    componentWillUnmount(){
+        clearInterval(this.interval);
+    }
+    refreshData(){
+        axios.get('request/test/getCurrencies').then((result)=>{
+            const res = result.data.content;
+        this.setState({data:res});
+        });
+    }
     componentDidMount(){
         axios.get('request/test/getCurrencies').then((result)=>{
             const res = result.data.content;
@@ -17,8 +26,8 @@ class PriceDiffPage extends Component{
                     pre[cur['name']] = {};
                 return pre;
             },{});
-
             this.setState({data:res,currencies:_.keys(currencies)});
+            this.interval = setInterval(()=>{this.refreshData()},60000);
         });
     }
     render(){

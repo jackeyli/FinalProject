@@ -29,9 +29,6 @@ export const Header = (props)=>{
             <Menu.Item name="subscription">
                 <Link to="/subscription">Subscription</Link>
             </Menu.Item>
-            <Menu.Item name="profile">
-                <Link to="/profile">Profile</Link>
-            </Menu.Item>
             <Menu.Menu position='right'>
                 <Menu.Item>
                     <Button onClick={onOpenSignInModal}>Sign In</Button>

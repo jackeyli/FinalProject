@@ -7,7 +7,6 @@ import li.yifei4.util.EntityManagerUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.management.Notification;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,6 +32,11 @@ public class DefaultConditionServiceImpl implements ConditionService{
 
     @Resource(name="digitalMarketCurrencyDao")
     private DigitalMarketCurrencyDao digitalMarketCurrencyDao;
+
+    public boolean storeNotificationHistory(NotificationHistory history){
+        EntityManagerUtil.getEntityManager().persist(history);
+        return true;
+    }
 
     @Override
     public List<ConditionCheckResult> getPassedConditionThisRound() {
@@ -197,6 +201,8 @@ public class DefaultConditionServiceImpl implements ConditionService{
                 diffResult.setCurrencyName(currency);
                 diffResult.setMarketPlace_1(min.getMarketPlcName());
                 diffResult.setMarketPlace_2(max.getMarketPlcName());
+                diffResult.setPrice_1(min.getPrice());
+                diffResult.setPrice_2(max.getPrice());
                 diffResult.setDiff(curDiff);
             } else {
                 diffResult.setPass(false);

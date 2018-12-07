@@ -7,6 +7,18 @@ class PriceChart extends Component{
         super(props);
         this.state = this.props;
     }
+    componentWillUnmount(){
+        clearInterval(this.interval);
+    }
+    refreshData(){
+        axios.post('request/test/currencyPriceHistory',{
+            market:this.state.market,
+            name:this.state.currency,
+            interval:this.state.interval
+        }).then((res)=>{
+            this.setState({data:res.data.content});
+        });
+    }
     componentDidMount(){
         axios.get('request/test/getCurrencies').then((res)=>{
             const currencies = res.data.content.reduce((pre,cur)=>{
@@ -20,6 +32,7 @@ class PriceChart extends Component{
                 interval:'30MIN'
             }).then((res)=>{
                 this.setState({currencies:currencies.map((t)=>t['key']),data:res.data.content,activeInterval:'30MIN'});
+                this.interval = setInterval(()=>{this.refreshData()},60000);
             });
         })
     }

@@ -16,6 +16,7 @@
         <class>li.yifei4.datas.entity.DiffThresHoldCondition</class>
         <class>li.yifei4.datas.entity.MANotificationCondition</class>
         <class>li.yifei4.datas.entity.NotificationCondition</class>
+        <class>li.yifei4.datas.entity.NotificationHistory</class>
         <class>li.yifei4.datas.entity.User</class>
         <properties>
             <property name="hibernate.show_sql" value="true" />
