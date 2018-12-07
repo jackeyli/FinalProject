@@ -60,7 +60,7 @@ public class DefaultNotificationServiceImpl implements NotificationService{
                 .withDataType("String"));
         snsClient.publish(new PublishRequest()
                 .withMessage(message)
-                .withPhoneNumber("+8618616500832")
+                .withPhoneNumber(phoneNumber)
                 .withMessageAttributes(smsAttributes));
         return true;
     }
