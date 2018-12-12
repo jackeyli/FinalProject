@@ -71,8 +71,12 @@ public class DefaultConditionServiceImpl implements ConditionService{
 
     public boolean removeNotificationCondition(int oid){
         NotificationCondition notification = EntityManagerUtil.getEntityManager().find(NotificationCondition.class,oid);
-        if(notification != null)
+        if(notification != null) {
+            for(NotificationHistory history :notification.getHistory()){
+                EntityManagerUtil.getEntityManager().remove(history);
+            }
             EntityManagerUtil.getEntityManager().remove(notification);
+        }
         return true;
     }
 
@@ -112,6 +116,10 @@ public class DefaultConditionServiceImpl implements ConditionService{
         String marketPlc = maCondi.getMarketPlace();
         List<CurrencyPriceBean> prices = digitalMarketCurrencyDao
                 .queryForPrices(marketPlc,currency,interval);
+        if(prices.get(0).getOpen() < 0){
+            result.setPass(false);
+            return result;
+        }
         double maCur_1 = 0;
         double maLst_1 = 0;
         int countCur_1 = 0;
@@ -184,11 +192,11 @@ public class DefaultConditionServiceImpl implements ConditionService{
         DigitalMarketCurrency min = null;
         DigitalMarketCurrency max = null;
         for(DigitalMarketCurrency cur : relatedCurrencies){
-            if(min == null)
+            if(min == null && cur.getPrice() > 0)
                 min = cur;
-            if(max == null)
+            if(max == null && cur.getPrice() > 0)
                 max = cur;
-            if(min.getPrice() > cur.getPrice())
+            if(min.getPrice() > cur.getPrice() && cur.getPrice() > 0)
                 min = cur;
             if(max.getPrice() < cur.getPrice())
                 max = cur;

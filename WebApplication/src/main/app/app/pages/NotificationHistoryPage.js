@@ -14,7 +14,7 @@ class NotificationHistoryPage extends Component{
     onSearchClick(){
         axios.post('request/test/notificationHistory',{
             dateFrom:moment(this.state.dateFrom,'YYYY-MM-DD').startOf('day').format('YYYY-MM-DD HH:mm:ss'),
-            dateTo:moment(this.state.dateFrom,'YYYY-MM-DD').endOf('day').format('YYYY-MM-DD HH:mm:ss'),
+            dateTo:moment(this.state.dateTo,'YYYY-MM-DD').endOf('day').format('YYYY-MM-DD HH:mm:ss'),
         }).then((res)=>{
             this.setState({histories:res.data.content});
         });

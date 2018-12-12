@@ -4,7 +4,7 @@
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>index.html</welcome-file>
   </welcome-file-list>
   <listener>
     <listener-class>li.yifei4.listener.MyContextListener</listener-class>

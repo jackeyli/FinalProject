@@ -24,7 +24,7 @@ class AddNotificationModal extends Component{
         this.setState({ma_market_place: arg2.value});
     }
     onChangePeriod(arg1,arg2){
-        this.setState({interval:arg2.value});
+        this.setState({ma_interval:arg2.value});
     }
     onChangeDirection(arg1,arg2){
         this.setState({direction:arg2.value});
@@ -38,8 +38,8 @@ class AddNotificationModal extends Component{
             ma_arg_1:this.state.ma_arg_1,
             ma_arg_2:this.state.ma_arg_2,
             ma_market_place:this.state.ma_market_place,
-            interval:this.state.interval,
-            diffThre:this.state.diffThre,
+            interval:this.state.ma_interval,
+            diffThre:this.state.threDiff,
             direction:this.state.direction
         }
         axios.post('request/test/storeNotiCondition',notifyObj).then((res)=>{
@@ -116,7 +116,7 @@ class AddNotificationModal extends Component{
             <div>
                 <Button style={{'margin-left':'10px'}}size="large" onClick={this.openModal.bind(this)}>Add</Button>
                 <Modal centered = {true} style={{height:'650px'}} size="small" open={open}>
-                    <Modal.Header>Add Notification</Modal.Header>
+                    <Modal.Header>{this.state.edit ? "Add Notification" : "Add Notification"}</Modal.Header>
                         <Modal.Content scrolling>
                             <Select placeholder="Select a currency" value={this.state.currency}
                                 options = {
@@ -150,7 +150,9 @@ class AddNotificationModal extends Component{
                         </Modal.Content>
                         <Modal.Actions>
                             <Button primary onClick={this.onSubmit.bind(this)}>
-                                Add
+                                        {
+                                            this.state.edit ? 'Add':'Add'
+                                        }
                             </Button>
                             <Button onClick={()=>{this.setState({open:false})}}>
                                 Close
@@ -163,6 +165,7 @@ class AddNotificationModal extends Component{
 }
 AddNotificationModal.defaultProps = {
     open:false,
+    edit:false,
     currency:'',
     currencies:[],
     notifyType:'EMAIL',

@@ -20,18 +20,10 @@ function onOpenSignUpModal(){
 export const Header = (props)=>{
     return (
         <Menu secondary>
-            <Menu.Item name="home">
-                <Link to="/overview">Home</Link>
-            </Menu.Item>
-            <Menu.Item name="pricediff">
-                <Link to="/pricediff">Price Diff</Link>
-            </Menu.Item>
-            <Menu.Item name="subscription">
-                <Link to="/subscription">Subscription</Link>
-            </Menu.Item>
-            <Menu.Item name="notificationHistory">
-                <Link to="/notificationHistory">Notification History</Link>
-            </Menu.Item>
+            <Menu.Item as ={Link} to = "/WebApplication/overview" name="home"/>
+            <Menu.Item as ={Link} to="/WebApplication/pricediff" name="pricediff"/>
+            <Menu.Item as={Link} to="/WebApplication/subscription" name="subscription"/>
+            <Menu.Item as={Link} to="/WebApplication/notificationHistory" name="notificationHistory"/>
             <Menu.Menu position='right'>
                 <Menu.Item>
                     <Button size="small" onClick={onOpenSignInModal}>Sign In</Button>

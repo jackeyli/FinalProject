@@ -7,6 +7,7 @@ class SubscriptionPage extends Component{
     constructor(props){
         super(props);
         this.state = {currencies:[],markets:[],notifications:[]};
+        this.refModal = React.createRef();
     }
     createDeleteFunc(arg){
         const thisNotification = arg;
@@ -59,7 +60,10 @@ class SubscriptionPage extends Component{
             <Grid padded>
             <Grid.Row>
                 <Grid.Column>
-                    <AddNotificationModal currencies={this.state.currencies} markets={this.state.markets}/>
+                    <AddNotificationModal
+                        currencies={this.state.currencies}
+                        markets={this.state.markets}
+                    />
                 </Grid.Column>
             </Grid.Row>
             <Grid.Row>

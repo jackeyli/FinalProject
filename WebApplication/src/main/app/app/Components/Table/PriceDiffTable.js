@@ -5,6 +5,7 @@ class PriceDiffTable extends Component{
         super(props);
     }
     render(){
+        debugger;
         return (
             <Grid padded>
                 <Grid.Row color="grey">
@@ -35,7 +36,7 @@ class PriceDiffTable extends Component{
                         {this.props.currencies.map((t)=>{
                             return (
                                 <Table.Row>
-                                <Table.Cell>{this.props.data[t][this.props.curMarket]}</Table.Cell>
+                                <Table.Cell>{t + '(' + (+this.props.data[t][this.props.curMarket]).toFixed(2) + ')'}</Table.Cell>
                                 {
                                     this.props.markets.filter((t)=>t != this.props.curMarket)
                                     .map((p)=>{
@@ -45,7 +46,7 @@ class PriceDiffTable extends Component{
                                             <Table.Cell>
                                                 <span style = {{color:diff < 0 ? 'green' : 'red'}}>
                                                     {
-                                                        this.props.data[t][p] + '(' + diff.toFixed(2) + '%' + ')'
+                                                        this.props.data[t][p].toFixed(2) + '(' + diff.toFixed(2) + '%' + ')'
                                                     }
                                                 </span>
                                             </Table.Cell>

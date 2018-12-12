@@ -6,7 +6,6 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.criteria.Predicate;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Repository("notificationHistoryDao")
 public class NotificationHistoryDao extends EntityDao<NotificationHistory> {
@@ -14,9 +13,11 @@ public class NotificationHistoryDao extends EntityDao<NotificationHistory> {
         MyCriteriaBuilder<NotificationHistory> builder = this.getCriteriaBuilder();
         Predicate user = builder.predicate("equal",
                 builder.get("condition").get("user").get("oid"),userId);
-        Predicate dateRange = builder.predicate("between",
-                builder.get("triggerTime"),from, Optional.ofNullable(to).orElse(new Date()));
-        builder.where(builder.and(user,dateRange));
+        Predicate greaterThan = builder.predicate("greaterThan",builder.get("triggerTime"),
+                from);
+        Predicate lessThan = builder.predicate("lessThan",builder.get("triggerTime"),
+                to);
+        builder.where(builder.and(user,greaterThan,lessThan));
         return builder.createExecutiveQuery().getResultList();
     }
 }

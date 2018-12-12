@@ -8,6 +8,7 @@ class MarketGrid extends Component{
     componentDidMount(){
     }
     render(){
+        debugger;
         return (
           <Table cell padded>
              <Table.Header>
@@ -33,7 +34,10 @@ class MarketGrid extends Component{
                                     this.props.data.columns.map((c)=>{
                                         return (
                                             <Table.Cell>
-                                                {data[c]}
+                                                {
+                                                    isNaN(data[c]) ? data[c] :
+                                                    (+data[c]).toFixed(2)
+                                                }
                                             </Table.Cell>
                                         )
                                     })

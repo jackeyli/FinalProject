@@ -40,8 +40,8 @@ class PriceDiffPage extends Component{
                         pre[cur['name']][cur['marketPlcName']] = cur['price'];
                         return pre;
                     },{})}
-                  curMarket = "COINBASE"
-                  markets={["COINBASE","COINEX","HUOBI","POLONIEX"]}
+                  curMarket = "BCEX"
+                  markets={["BCEX","COINEX","HUOBI","POLONIEX"]}
                   currencies={this.state.currencies}
                   />
               <PriceDiffTable data={this.state.data
@@ -52,7 +52,7 @@ class PriceDiffPage extends Component{
                             return pre;
                             },{})}
                   curMarket="COINEX"
-                  markets={["COINBASE","COINEX","HUOBI","POLONIEX"]}
+                  markets={["BCEX","COINEX","HUOBI","POLONIEX"]}
                   currencies={this.state.currencies}
                   />
               <PriceDiffTable data={this.state.data
@@ -63,7 +63,7 @@ class PriceDiffPage extends Component{
                             return pre;
                             },{})}
                   curMarket="HUOBI"
-                  markets={["COINBASE","COINEX","HUOBI","POLONIEX"]}
+                  markets={["BCEX","COINEX","HUOBI","POLONIEX"]}
                   currencies={this.state.currencies}/>
               <PriceDiffTable data={this.state.data
                             .reduce((pre,cur)=>{
@@ -73,7 +73,7 @@ class PriceDiffPage extends Component{
                             return pre;
                             },{})}
                   curMarket="POLONIEX"
-                  markets={["COINBASE","COINEX","HUOBI","POLONIEX"]}
+                  markets={["BCEX","COINEX","HUOBI","POLONIEX"]}
                   currencies={this.state.currencies}/>
             </div>
         );

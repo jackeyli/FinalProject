@@ -96,6 +96,7 @@ public class MyController {
                 bean.setName(t.getName());
                 bean.setNotifyType(t.getNotifyType());
                 bean.setType(t.getType());
+                bean.setOid(t.getOid());
                 return bean;
             }).collect(Collectors.toList()));
         }catch(Throwable t){

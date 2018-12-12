@@ -36,7 +36,7 @@ class SignUpModal extends Component{
             }).then((res)=>{
                 alert(res.data.content);
                 this.setState({open:false});
-                window.location.href = window.location.protocol + '//' + window.location.host;
+                window.location.href = window.location.protocol + '//' + window.location.host + "/WebApplication";
             });
         }
     }

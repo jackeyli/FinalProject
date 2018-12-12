@@ -7,7 +7,7 @@ class OverviewPage extends Component{
         return (
             <div>
                 <OverviewContainer/>
-                <PriceChart market={"COINBASE"}/>
+                <PriceChart market={"BCEX"}/>
                 <PriceChart market={"COINEX"}/>
                 <PriceChart market={"HUOBI"}/>
                 <PriceChart market={"POLONIEX"}/>

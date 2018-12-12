@@ -53,9 +53,9 @@ class PriceChart extends Component{
         }
         var data = splitData(this.state.data.sort((a,b) => {
             return a['time'].localeCompare(b['time']);
-        }).map((t)=>{return [t['time'],t['open'],
-                t['close'],t['lowest'],
-                t['highest']]})
+        }).map((t)=>{return [t['time'],+t['open'].toFixed(2),
+                +t['close'].toFixed(2),+t['lowest'].toFixed(2),
+                +t['highest'].toFixed(2)]})
         );
         var calculateMA = function(dayCount,data) {
             var result = [];
